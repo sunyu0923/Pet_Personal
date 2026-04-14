@@ -17,7 +17,7 @@ export default function ResultPage() {
     if (!shareId) { navigate('/'); return }
     fetchResult(shareId)
       .then((data) => { setResult(data); setLoading(false) })
-      .catch(() => { setError('Result not found.'); setLoading(false) })
+      .catch(() => { setError('结果不存在。'); setLoading(false) })
   }, [shareId])
 
   if (loading) return (
@@ -28,8 +28,8 @@ export default function ResultPage() {
 
   if (error || !result) return (
     <div className={styles.center}>
-      <p className={styles.errorText}>{error || 'Something went wrong.'}</p>
-      <button className={styles.backBtn} onClick={() => navigate('/')}>← Try the test</button>
+      <p className={styles.errorText}>{error || '出错了。'}</p>
+      <button className={styles.backBtn} onClick={() => navigate('/')}>← 去测试</button>
     </div>
   )
 
@@ -37,10 +37,10 @@ export default function ResultPage() {
   const isPet = pet_type === 'cat' ? 'cat' : 'dog'
 
   const dimensionSummary = [
-    { label: 'E — I', score: scores.ei },
-    { label: 'S — N', score: scores.sn },
-    { label: 'T — F', score: scores.tf },
-    { label: 'J — P', score: scores.jp },
+    { label: '外向—内向', score: scores.ei },
+    { label: '实感—直觉', score: scores.sn },
+    { label: '思维—情感', score: scores.tf },
+    { label: '判断—感知', score: scores.jp },
   ]
 
   return (
@@ -63,13 +63,13 @@ export default function ResultPage() {
       {/* Strengths & Weaknesses */}
       <div className={styles.swGrid}>
         <div className={styles.swCard}>
-          <h3 className={styles.swTitle}>Strengths</h3>
+          <h3 className={styles.swTitle}>优势特质</h3>
           <ul className={styles.swList}>
             {personality.strengths.map((s) => <li key={s}>{s}</li>)}
           </ul>
         </div>
         <div className={styles.swCard}>
-          <h3 className={`${styles.swTitle} ${styles.weakTitle}`}>Weaknesses</h3>
+          <h3 className={`${styles.swTitle} ${styles.weakTitle}`}>成长空间</h3>
           <ul className={styles.swList}>
             {personality.weaknesses.map((w) => <li key={w}>{w}</li>)}
           </ul>
@@ -78,7 +78,7 @@ export default function ResultPage() {
 
       {/* Radar Chart */}
       <div className={styles.section}>
-        <h3 className={styles.sectionTitle}>Your Personality Map</h3>
+        <h3 className={styles.sectionTitle}>性格雷达图</h3>
         <RadarChart scores={scores} petType={pet_type} />
         <div className={styles.dimensionBars}>
           {dimensionSummary.map(({ label, score }) => (
@@ -101,7 +101,7 @@ export default function ResultPage() {
       <div className={styles.actions}>
         <ShareButton />
         <button className={styles.retakeBtn} onClick={() => navigate('/')}>
-          Take another test
+          再测一次
         </button>
       </div>
     </div>

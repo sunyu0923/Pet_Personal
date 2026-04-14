@@ -16,7 +16,7 @@ export default function ShareButton() {
 
   return (
     <button className={styles.btn} onClick={handleCopy}>
-      {copied ? '✓ Link copied!' : '🔗 Share result'}
+      {copied ? '✓ 链接已复制！' : '🔗 分享结果'}
     </button>
   )
 }

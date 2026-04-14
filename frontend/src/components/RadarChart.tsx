@@ -13,19 +13,12 @@ interface Props {
   petType: string
 }
 
-const LABELS = {
-  ei: { pos: 'E', neg: 'I', full: 'Extrovert — Introvert' },
-  sn: { pos: 'S', neg: 'N', full: 'Sensing — iNtuition' },
-  tf: { pos: 'T', neg: 'F', full: 'Thinking — Feeling' },
-  jp: { pos: 'J', neg: 'P', full: 'Judging — Perceiving' },
-}
-
 export default function RadarChart({ scores, petType }: Props) {
   const data = [
-    { axis: `${LABELS.ei.pos} — ${LABELS.ei.neg}`, value: scores.ei.pct },
-    { axis: `${LABELS.sn.pos} — ${LABELS.sn.neg}`, value: scores.sn.pct },
-    { axis: `${LABELS.tf.pos} — ${LABELS.tf.neg}`, value: scores.tf.pct },
-    { axis: `${LABELS.jp.pos} — ${LABELS.jp.neg}`, value: scores.jp.pct },
+    { axis: '外向 — 内向', value: scores.ei.pct },
+    { axis: '实感 — 直觉', value: scores.sn.pct },
+    { axis: '思维 — 情感', value: scores.tf.pct },
+    { axis: '判断 — 感知', value: scores.jp.pct },
   ]
 
   const fillColor = petType === 'cat' ? '#a855f7' : '#f97316'
@@ -54,7 +47,7 @@ export default function RadarChart({ scores, petType }: Props) {
             color: 'white',
             fontSize: 13,
           }}
-          formatter={(value: number) => [`${value}%`, 'Score']}
+          formatter={(value: number) => [`${value}%`, '得分']}
         />
       </ReRadarChart>
     </ResponsiveContainer>

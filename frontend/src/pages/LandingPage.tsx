@@ -4,8 +4,8 @@ import type { PetType } from '../types'
 import styles from './LandingPage.module.css'
 
 const pets: { type: PetType; emoji: string; label: string; tagline: string; theme: string }[] = [
-  { type: 'cat', emoji: '🐱', label: 'Cat', tagline: '12 questions. Ancient feline wisdom.', theme: 'cat' },
-  { type: 'dog', emoji: '🐶', label: 'Dog', tagline: '12 questions. Eternal canine joy.', theme: 'dog' },
+  { type: 'cat', emoji: '🐱', label: '猫咪', tagline: '12道题 · 解读猫咪的神秘灵魂', theme: 'cat' },
+  { type: 'dog', emoji: '🐶', label: '狗狗', tagline: '12道题 · 感受狗狗的无限热情', theme: 'dog' },
 ]
 
 export default function LandingPage() {
@@ -22,7 +22,7 @@ export default function LandingPage() {
     <div className={styles.page}>
       <div className={styles.hero}>
         <h1 className={styles.title}>PETI</h1>
-        <p className={styles.subtitle}>Discover which personality type your pet truly is — or which type <em>you</em> are.</p>
+        <p className={styles.subtitle}>探索你的猫咪或狗狗属于哪种性格类型——也许那其实是你自己。</p>
       </div>
 
       <div className={styles.cards}>
@@ -35,12 +35,12 @@ export default function LandingPage() {
             <span className={styles.petEmoji}>{pet.emoji}</span>
             <span className={styles.petLabel}>{pet.label}</span>
             <span className={styles.petTagline}>{pet.tagline}</span>
-            <span className={styles.startBtn}>Start Test →</span>
+            <span className={styles.startBtn}>开始测试 →</span>
           </button>
         ))}
       </div>
 
-      <p className={styles.footer}>16 personality types · Shareable results · 3 minutes</p>
+      <p className={styles.footer}>16种性格类型 · 可分享结果 · 约3分钟</p>
     </div>
   )
 }

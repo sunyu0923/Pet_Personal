@@ -6,10 +6,10 @@ import type { PetType, Answer } from '../types'
 import styles from './QuizPage.module.css'
 
 const DIMENSION_LABELS: Record<string, string> = {
-  'E/I': 'Social Energy',
-  'S/N': 'Perception Style',
-  'T/F': 'Decision Making',
-  'J/P': 'Lifestyle Rhythm',
+  'E/I': '社交能量',
+  'S/N': '感知方式',
+  'T/F': '决策风格',
+  'J/P': '生活节奏',
 }
 
 export default function QuizPage() {
@@ -33,7 +33,7 @@ export default function QuizPage() {
         setLoading(false)
       })
       .catch(() => {
-        setError('Failed to load questions.')
+        setError('题目加载失败，请刷新重试。')
         setLoading(false)
       })
   }, [petType])
@@ -51,7 +51,7 @@ export default function QuizPage() {
         const result = await submitAnswers(petType as PetType, allAnswers)
         navigate(`/result/${result.share_id}`)
       } catch {
-        setError('Something went wrong. Please try again.')
+        setError('出错了，请重试。')
         setSubmitting(false)
         setSelectedAnswer(null)
       }
@@ -72,14 +72,14 @@ export default function QuizPage() {
   if (error) return (
     <div className={styles.center}>
       <p className={styles.errorText}>{error}</p>
-      <button className={styles.retryBtn} onClick={() => navigate('/')}>← Go Back</button>
+      <button className={styles.retryBtn} onClick={() => navigate('/')}>← 返回</button>
     </div>
   )
 
   if (submitting) return (
     <div className={styles.center}>
       <div className="spinner" />
-      <p style={{ marginTop: 16, color: 'var(--text-muted)' }}>Calculating your type...</p>
+      <p style={{ marginTop: 16, color: 'var(--text-muted)' }}>正在分析你的性格类型……</p>
     </div>
   )
 
