@@ -1,0 +1,139 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px 48px;
+  gap: 40px;
+}
+
+.hero {
+  text-align: center;
+  animation: fadeSlideIn 0.5s ease both;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.title {
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 900;
+  letter-spacing: -4px;
+  background: linear-gradient(135deg, #a855f7, #f97316, #e879f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: var(--text-muted);
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeSlideIn 0.5s 0.15s ease both;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 220px;
+  padding: 32px 24px 28px;
+  border-radius: 24px;
+  background: var(--surface);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.card_cat::before {
+  background: linear-gradient(135deg, var(--cat-bg-start), var(--cat-bg-end));
+}
+
+.card_dog::before {
+  background: linear-gradient(135deg, var(--dog-bg-start), var(--dog-bg-end));
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover .petEmoji,
+.card:hover .petLabel,
+.card:hover .petTagline,
+.card:hover .startBtn {
+  position: relative;
+  z-index: 1;
+}
+
+.petEmoji {
+  font-size: 56px;
+  position: relative;
+  z-index: 1;
+}
+
+.petLabel {
+  font-size: 28px;
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+}
+
+.petTagline {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  line-height: 1.4;
+}
+
+.card:hover .petTagline {
+  color: rgba(255,255,255,0.8);
+}
+
+.startBtn {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+  position: relative;
+  z-index: 1;
+  transition: color 0.2s;
+}
+
+.card:hover .startBtn {
+  color: white;
+}
+
+.footer {
+  font-size: 13px;
+  color: var(--text-muted);
+  animation: fadeSlideIn 0.5s 0.3s ease both;
+}
