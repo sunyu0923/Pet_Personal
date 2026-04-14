@@ -12,6 +12,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+    networks:
+      - peti_network
 
   backend:
     build:
@@ -19,31 +21,54 @@ services:
       dockerfile: Dockerfile
     environment:
       DATABASE_URL: postgresql://peti:peti_dev@db:5432/peti
-      ALLOWED_ORIGINS: http://localhost
+      ALLOWED_ORIGINS: https://peti.asia,https://www.peti.asia,http://peti.asia
     depends_on:
       db:
         condition: service_healthy
-    # 不对外暴露端口，只在内部网络通信
+    networks:
+      - peti_network
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     volumes:
-      # 将构建产物挂载到 nginx 服务的 html 目录
       - frontend_dist:/usr/share/nginx/html
+    networks:
+      - peti_network
 
   nginx:
     image: nginx:alpine
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - frontend_dist:/usr/share/nginx/html:ro
+      - certbot_www:/var/www/certbot:ro
+      - certbot_certs:/etc/letsencrypt:ro
     depends_on:
       - backend
       - frontend
+    restart: unless-stopped
+    networks:
+      - peti_network
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - certbot_www:/var/www/certbot
+      - certbot_certs:/etc/letsencrypt
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    networks:
+      - peti_network
 
 volumes:
   peti_pgdata:
   frontend_dist:
+  certbot_www:
+  certbot_certs:
+
+networks:
+  peti_network:
+    driver: bridge
