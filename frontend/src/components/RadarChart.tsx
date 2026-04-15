@@ -6,7 +6,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from 'recharts'
-import type { ResultScores } from '../../types'
+import type { ResultScores } from '../types'
 
 interface Props {
   scores: ResultScores
@@ -47,7 +47,7 @@ export default function RadarChart({ scores, petType }: Props) {
             color: 'white',
             fontSize: 13,
           }}
-          formatter={(value: number) => [`${value}%`, '得分']}
+          formatter={(value) => [`${value}%`, '得分']}
         />
       </ReRadarChart>
     </ResponsiveContainer>

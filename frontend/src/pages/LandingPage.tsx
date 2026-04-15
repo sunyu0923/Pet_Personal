@@ -5,7 +5,7 @@ import styles from './LandingPage.module.css'
 
 const pets: { type: PetType; emoji: string; label: string; tagline: string; theme: string }[] = [
   { type: 'cat', emoji: '🐱', label: '猫咪', tagline: '12道题 · 解读猫咪的神秘灵魂', theme: 'cat' },
-  { type: 'dog', emoji: '🐶', label: '狗狗', tagline: '12道题 · 感受狗狗的无限热情', theme: 'dog' },
+  { type: 'dog', emoji: '🐶', label: '狗狗', tagline: '16道题 · 真实情景版搞笑MBTI', theme: 'dog' },
 ]
 
 export default function LandingPage() {

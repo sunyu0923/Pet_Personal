@@ -33,71 +33,87 @@ export default function ResultPage() {
     </div>
   )
 
-  const { mbti_code, pet_type, personality, scores } = result
+  const { type_code, pet_type, personality, scores } = result
   const isPet = pet_type === 'cat' ? 'cat' : 'dog'
-
-  const dimensionSummary = [
+  const dimensionSummary = scores ? [
     { label: '外向—内向', score: scores.ei },
     { label: '实感—直觉', score: scores.sn },
     { label: '思维—情感', score: scores.tf },
     { label: '判断—感知', score: scores.jp },
-  ]
+  ] : []
 
   return (
     <div className={`${styles.page} animate-fade-slide`}>
-      {/* Header card */}
       <div className={`${styles.headerCard} ${styles[`theme_${isPet}`]}`}>
         <span className={styles.emoji}>{personality.emoji}</span>
-        <div className={styles.typeCode}>{mbti_code}</div>
+        <div className={styles.typeCode}>{type_code}</div>
         <div className={styles.typeName}>{personality.name}</div>
+        {personality.english_name && <div className={styles.tagline}>{personality.english_name}</div>}
+        {personality.common_breed && <div className={styles.tagline}>常见犬种：{personality.common_breed}</div>}
         <div className={styles.tagline}>{personality.tagline}</div>
       </div>
 
-      {/* Description */}
-      <div className={styles.section}>
-        {personality.description.split('\n\n').map((para, i) => (
-          <p key={i} className={styles.descPara}>{para}</p>
-        ))}
-      </div>
-
-      {/* Strengths & Weaknesses */}
-      <div className={styles.swGrid}>
-        <div className={styles.swCard}>
-          <h3 className={styles.swTitle}>优势特质</h3>
-          <ul className={styles.swList}>
-            {personality.strengths.map((s) => <li key={s}>{s}</li>)}
-          </ul>
-        </div>
-        <div className={styles.swCard}>
-          <h3 className={`${styles.swTitle} ${styles.weakTitle}`}>成长空间</h3>
-          <ul className={styles.swList}>
-            {personality.weaknesses.map((w) => <li key={w}>{w}</li>)}
-          </ul>
-        </div>
-      </div>
-
-      {/* Radar Chart */}
-      <div className={styles.section}>
-        <h3 className={styles.sectionTitle}>性格雷达图</h3>
-        <RadarChart scores={scores} petType={pet_type} />
-        <div className={styles.dimensionBars}>
-          {dimensionSummary.map(({ label, score }) => (
-            <div key={label} className={styles.dimRow}>
-              <span className={styles.dimLabel}>{label}</span>
-              <div className={styles.dimBarTrack}>
-                <div
-                  className={`${styles.dimBar} ${styles[`dimBar_${isPet}`]}`}
-                  style={{ width: `${score.pct}%` }}
-                />
-                <div className={styles.midLine} />
-              </div>
-              <span className={styles.dimDominant}>{score.dominant}</span>
-            </div>
+      {personality.description && (
+        <div className={styles.section}>
+          {personality.description.split('\n\n').map((para, i) => (
+            <p key={i} className={styles.descPara}>{para}</p>
           ))}
         </div>
-      </div>
+      )}
 
-      {/* Actions */}
+      {(personality.strengths?.length || personality.weaknesses?.length) && (
+        <div className={styles.swGrid}>
+          <div className={styles.swCard}>
+            <h3 className={styles.swTitle}>优势特质</h3>
+            <ul className={styles.swList}>
+              {(personality.strengths ?? []).map((s) => <li key={s}>{s}</li>)}
+            </ul>
+          </div>
+          <div className={styles.swCard}>
+            <h3 className={`${styles.swTitle} ${styles.weakTitle}`}>成长空间</h3>
+            <ul className={styles.swList}>
+              {(personality.weaknesses ?? []).map((w) => <li key={w}>{w}</li>)}
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {personality.life_tips && (
+        <div className={styles.section}>
+          <h3 className={styles.sectionTitle}>生活注意事项</h3>
+          <p className={styles.descPara}>{personality.life_tips}</p>
+        </div>
+      )}
+
+      {personality.training_tips && (
+        <div className={styles.section}>
+          <h3 className={styles.sectionTitle}>驯服教育窍门</h3>
+          <p className={styles.descPara}>{personality.training_tips}</p>
+        </div>
+      )}
+
+      {scores && (
+        <div className={styles.section}>
+          <h3 className={styles.sectionTitle}>性格雷达图</h3>
+          <RadarChart scores={scores} petType={pet_type} />
+          <div className={styles.dimensionBars}>
+            {dimensionSummary.map(({ label, score }) => (
+              <div key={label} className={styles.dimRow}>
+                <span className={styles.dimLabel}>{label}</span>
+                <div className={styles.dimBarTrack}>
+                  <div
+                    className={`${styles.dimBar} ${styles[`dimBar_${isPet}`]}`}
+                    style={{ width: `${score.pct}%` }}
+                  />
+                  <div className={styles.midLine} />
+                </div>
+                <span className={styles.dimDominant}>{score.dominant}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className={styles.actions}>
         <ShareButton />
         <button className={styles.retakeBtn} onClick={() => navigate('/')}>

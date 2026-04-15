@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 from app.schemas.personality_type import PersonalityTypeOut
 
 
@@ -17,12 +18,13 @@ class ResultScores(BaseModel):
 
 class SubmitAnswersRequest(BaseModel):
     pet_type: str
-    answers: dict[str, str]  # question id (str) -> "a" or "b"
+    answers: dict[str, str]
 
 
 class ResultResponse(BaseModel):
     share_id: str
     pet_type: str
-    mbti_code: str
+    type_code: str
     personality: PersonalityTypeOut
-    scores: ResultScores
+    scores: Optional[ResultScores] = None
+    type_scores: Optional[dict[str, int]] = None

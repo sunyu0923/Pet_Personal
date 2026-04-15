@@ -1,10 +1,13 @@
+export interface QuestionOption {
+  key: string
+  text: string
+}
+
 export interface Question {
   id: number
-  dimension: string
   order_num: number
   text: string
-  option_a: string
-  option_b: string
+  options: QuestionOption[]
 }
 
 export interface QuestionsResponse {
@@ -14,10 +17,14 @@ export interface QuestionsResponse {
 
 export interface PersonalityType {
   name: string
+  english_name?: string | null
+  common_breed?: string | null
   tagline: string
-  description: string
-  strengths: string[]
-  weaknesses: string[]
+  description?: string | null
+  strengths?: string[] | null
+  weaknesses?: string[] | null
+  life_tips?: string | null
+  training_tips?: string | null
   emoji: string
 }
 
@@ -37,10 +44,11 @@ export interface ResultScores {
 export interface TestResult {
   share_id: string
   pet_type: string
-  mbti_code: string
+  type_code: string
   personality: PersonalityType
-  scores: ResultScores
+  scores?: ResultScores | null
+  type_scores?: Record<string, number> | null
 }
 
 export type PetType = 'cat' | 'dog'
-export type Answer = 'a' | 'b'
+export type Answer = 'a' | 'b' | 'c' | 'd'

@@ -5,13 +5,6 @@ import { useQuizStore } from '../store/quizStore'
 import type { PetType, Answer } from '../types'
 import styles from './QuizPage.module.css'
 
-const DIMENSION_LABELS: Record<string, string> = {
-  'E/I': '社交能量',
-  'S/N': '感知方式',
-  'T/F': '决策风格',
-  'J/P': '生活节奏',
-}
-
 export default function QuizPage() {
   const { petType } = useParams<{ petType: string }>()
   const navigate = useNavigate()
@@ -94,7 +87,7 @@ export default function QuizPage() {
           <div className={styles.progressFill} style={{ width: `${progress}%` }} />
         </div>
         <div className={styles.meta}>
-          <span className={styles.dimensionPill}>{DIMENSION_LABELS[question.dimension]}</span>
+          <span className={styles.counter}>{petType === 'dog' ? '狗狗MBTI' : '猫咪性格'}</span>
           <span className={styles.counter}>{currentIndex + 1} / {questions.length}</span>
         </div>
       </div>
@@ -104,8 +97,8 @@ export default function QuizPage() {
       </div>
 
       <div className={styles.answers}>
-        {(['a', 'b'] as Answer[]).map((ans) => {
-          const text = ans === 'a' ? question.option_a : question.option_b
+        {question.options.map((option) => {
+          const ans = option.key as Answer
           return (
             <button
               key={ans}
@@ -113,7 +106,7 @@ export default function QuizPage() {
               onClick={() => handleAnswer(ans)}
               disabled={!!selectedAnswer}
             >
-              {text}
+              {option.text}
             </button>
           )
         })}

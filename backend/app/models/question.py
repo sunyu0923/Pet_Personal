@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, UniqueConstraint
+from sqlalchemy import Column, Integer, String, Text, JSON, UniqueConstraint
 from app.database import Base
 
 
@@ -7,12 +7,10 @@ class Question(Base):
 
     id = Column(Integer, primary_key=True)
     pet_type = Column(String(3), nullable=False)
-    dimension = Column(String(3), nullable=False)
     order_num = Column(Integer, nullable=False)
     text = Column(Text, nullable=False)
-    option_a = Column(Text, nullable=False)
-    option_b = Column(Text, nullable=False)
+    options = Column(JSON, nullable=False)
 
     __table_args__ = (
-        UniqueConstraint("pet_type", "dimension", "order_num", name="uq_question"),
+        UniqueConstraint("pet_type", "order_num", name="uq_question_v2"),
     )

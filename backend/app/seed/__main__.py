@@ -10,13 +10,11 @@ def seed_questions(db):
         for q in questions:
             existing = db.query(Question).filter(
                 Question.pet_type == pet_type,
-                Question.dimension == q["dimension"],
                 Question.order_num == q["order_num"],
             ).first()
             if existing:
                 existing.text = q["text"]
-                existing.option_a = q["option_a"]
-                existing.option_b = q["option_b"]
+                existing.options = q["options"]
             else:
                 db.add(Question(pet_type=pet_type, **q))
     db.commit()
@@ -28,7 +26,7 @@ def seed_personality_types(db):
         for t in types:
             existing = db.query(PersonalityType).filter(
                 PersonalityType.pet_type == pet_type,
-                PersonalityType.mbti_code == t["mbti_code"],
+                PersonalityType.type_code == t["type_code"],
             ).first()
             if existing:
                 for k, v in t.items():

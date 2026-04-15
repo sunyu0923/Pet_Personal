@@ -8,8 +8,6 @@ from app.schemas.question import QuestionsResponse, QuestionOut
 
 router = APIRouter()
 
-DIMENSION_ORDER = {"E/I": 1, "S/N": 2, "T/F": 3, "J/P": 4}
-
 
 @router.get("/questions/{pet_type}", response_model=QuestionsResponse)
 def get_questions(pet_type: str, db: Session = Depends(get_db)):
@@ -19,12 +17,9 @@ def get_questions(pet_type: str, db: Session = Depends(get_db)):
     questions = (
         db.query(Question)
         .filter(Question.pet_type == pet_type)
-        .order_by(Question.dimension, asc(Question.order_num))
+        .order_by(asc(Question.order_num))
         .all()
     )
-
-    # Sort by dimension order then order_num
-    questions.sort(key=lambda q: (DIMENSION_ORDER[q.dimension], q.order_num))
 
     return QuestionsResponse(
         pet_type=pet_type,
