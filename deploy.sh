@@ -51,7 +51,9 @@ docker compose build
 
 # ─── 检查证书是否已存在 ─────────────────────
 CERTS_EXIST=false
-if docker compose run --rm --entrypoint "test" certbot -f "$CERT_PATH" 2>/dev/null; then
+CERT_VOLUME=$(docker volume ls -q | grep certbot_certs | head -1)
+if [ -n "$CERT_VOLUME" ] && docker run --rm -v "${CERT_VOLUME}:/etc/letsencrypt" alpine \
+    test -f "$CERT_PATH" 2>/dev/null; then
     CERTS_EXIST=true
 fi
 
