@@ -4,6 +4,7 @@ import { fetchResult } from '../api/client'
 import type { TestResult } from '../types'
 import RadarChart from '../components/RadarChart'
 import ShareButton from '../components/ShareButton'
+import { dogImages } from '../assets/dogImages'
 import styles from './ResultPage.module.css'
 
 export default function ResultPage() {
@@ -34,7 +35,9 @@ export default function ResultPage() {
   )
 
   const { type_code, pet_type, personality, scores } = result
-  const isPet = pet_type === 'cat' ? 'cat' : 'dog'
+  const isDog = pet_type === 'dog'
+  const isPet = isDog ? 'dog' : 'cat'
+  const dogImg = isDog ? dogImages[type_code] : undefined
   const dimensionSummary = scores ? [
     { label: '外向—内向', score: scores.ei },
     { label: '实感—直觉', score: scores.sn },
@@ -44,14 +47,38 @@ export default function ResultPage() {
 
   return (
     <div className={`${styles.page} animate-fade-slide`}>
-      <div className={`${styles.headerCard} ${styles[`theme_${isPet}`]}`}>
-        <span className={styles.emoji}>{personality.emoji}</span>
-        <div className={styles.typeCode}>{type_code}</div>
-        <div className={styles.typeName}>{personality.name}</div>
-        {personality.english_name && <div className={styles.tagline}>{personality.english_name}</div>}
-        {personality.common_breed && <div className={styles.tagline}>常见犬种：{personality.common_breed}</div>}
-        <div className={styles.tagline}>{personality.tagline}</div>
-      </div>
+      {/* ─── Dog: Card-style result with image ─── */}
+      {isDog && dogImg ? (
+        <>
+          <div className={styles.resultCardWrapper}>
+            <div className={styles.resultCard}>
+              <div className={styles.cardLabel}>你的狗狗 · 狗格MBTI是：</div>
+              <div className={styles.cardTypeName}>{personality.name}</div>
+              <div className={styles.cardTypeCode}>{type_code}</div>
+              <img src={dogImg} alt={type_code} className={styles.cardImage} />
+            </div>
+            <div className={styles.cardTagline}>{personality.tagline}</div>
+          </div>
+
+          <div className={styles.resultInfoCard}>
+            <div className={styles.infoLabel}>你的主类型：</div>
+            <div className={styles.infoType}>{type_code}（{personality.name}）</div>
+            {personality.common_breed && (
+              <div className={styles.infoBreed}>常见犬种：{personality.common_breed}</div>
+            )}
+          </div>
+        </>
+      ) : (
+        /* ─── Cat / fallback: original header ─── */
+        <div className={`${styles.headerCard} ${styles[`theme_${isPet}`]}`}>
+          <span className={styles.emoji}>{personality.emoji}</span>
+          <div className={styles.typeCode}>{type_code}</div>
+          <div className={styles.typeName}>{personality.name}</div>
+          {personality.english_name && <div className={styles.tagline}>{personality.english_name}</div>}
+          {personality.common_breed && <div className={styles.tagline}>常见犬种：{personality.common_breed}</div>}
+          <div className={styles.tagline}>{personality.tagline}</div>
+        </div>
+      )}
 
       {personality.description && (
         <div className={styles.section}>

@@ -28,6 +28,92 @@
   text-align: center;
 }
 
+/* ─── Dog result card (template style) ─── */
+.resultCardWrapper {
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(160deg, #e8f5e9, #f1f8e9);
+}
+
+.resultCard {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 32px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.cardLabel {
+  font-size: 15px;
+  color: #555;
+  font-weight: 500;
+}
+
+.cardTypeName {
+  font-size: 42px;
+  font-weight: 900;
+  color: #222;
+  line-height: 1.1;
+}
+
+.cardTypeCode {
+  font-size: 28px;
+  font-weight: 800;
+  color: #2e7d32;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+.cardImage {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.cardTagline {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+/* ─── Info card below the image card ─── */
+.resultInfoCard {
+  margin: 0 20px;
+  padding: 20px 24px;
+  background: rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.infoLabel {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.infoType {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.infoBreed {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+}
+
 .theme_cat.headerCard {
   background: linear-gradient(160deg, var(--cat-bg-start), var(--cat-bg-end));
 }
