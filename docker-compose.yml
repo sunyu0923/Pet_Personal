@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:16-alpine
+    image: docker.m.daocloud.io/library/postgres:16-alpine
     environment:
       POSTGRES_USER: peti
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?请先运行 deploy.sh 或手动创建 .env 文件}
@@ -41,7 +41,7 @@ services:
       - peti_network
 
   nginx:
-    image: nginx:alpine
+    image: docker.m.daocloud.io/library/nginx:alpine
     ports:
       - "80:80"
       - "443:443"
@@ -60,7 +60,7 @@ services:
       - peti_network
 
   certbot:
-    image: certbot/certbot
+    image: docker.m.daocloud.io/certbot/certbot
     volumes:
       - certbot_www:/var/www/certbot
       - certbot_certs:/etc/letsencrypt

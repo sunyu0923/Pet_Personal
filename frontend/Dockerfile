@@ -1,5 +1,5 @@
 # 构建阶段：生成静态文件
-FROM node:20-alpine AS builder
+FROM docker.m.daocloud.io/library/node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ COPY . .
 RUN npm run build
 
 # 导出阶段：将 dist 内容复制到空镜像的卷挂载点
-FROM alpine:3.19
+FROM docker.m.daocloud.io/library/alpine:3.19
 
 COPY --from=builder /app/dist /dist
 
