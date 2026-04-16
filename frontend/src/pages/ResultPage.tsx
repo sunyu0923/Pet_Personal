@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { fetchResult } from '../api/client'
 import type { TestResult } from '../types'
@@ -13,6 +13,7 @@ export default function ResultPage() {
   const [result, setResult] = useState<TestResult | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const captureRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!shareId) { navigate('/'); return }
@@ -47,6 +48,7 @@ export default function ResultPage() {
 
   return (
     <div className={`${styles.page} animate-fade-slide`}>
+      <div ref={captureRef} className={styles.captureArea}>
       {/* ─── Dog: Card-style result with image ─── */}
       {isDog && dogImg ? (
         <>
@@ -140,9 +142,10 @@ export default function ResultPage() {
           </div>
         </div>
       )}
+      </div>{/* end captureArea */}
 
       <div className={styles.actions}>
-        <ShareButton />
+        <ShareButton captureRef={captureRef} />
         <button className={styles.retakeBtn} onClick={() => navigate('/')}>
           再测一次
         </button>

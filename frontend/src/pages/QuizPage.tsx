@@ -8,7 +8,7 @@ import styles from './QuizPage.module.css'
 export default function QuizPage() {
   const { petType } = useParams<{ petType: string }>()
   const navigate = useNavigate()
-  const { questions, currentIndex, answers, setQuestions, setPetType, recordAnswer, advance } = useQuizStore()
+  const { questions, currentIndex, answers, setQuestions, setPetType, recordAnswer, advance, goBack } = useQuizStore()
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
   const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null)
@@ -30,6 +30,13 @@ export default function QuizPage() {
         setLoading(false)
       })
   }, [petType])
+
+  const handleGoBack = () => {
+    if (currentIndex > 0 && !submitting && !selectedAnswer) {
+      goBack()
+      setSelectedAnswer(null)
+    }
+  }
 
   const handleAnswer = async (answer: Answer) => {
     if (submitting || selectedAnswer) return
@@ -91,6 +98,12 @@ export default function QuizPage() {
           <span className={styles.counter}>{currentIndex + 1} / {questions.length}</span>
         </div>
       </div>
+
+      {currentIndex > 0 && (
+        <button className={styles.prevBtn} onClick={handleGoBack} disabled={!!selectedAnswer}>
+          ← 上一题
+        </button>
+      )}
 
       <div key={currentIndex} className={`${styles.questionCard} animate-scale-in`}>
         <p className={styles.questionText}>{question.text}</p>

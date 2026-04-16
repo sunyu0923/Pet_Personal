@@ -8,6 +8,13 @@
   gap: 0;
 }
 
+.captureArea {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
 .center {
   min-height: 100vh;
   display: flex;

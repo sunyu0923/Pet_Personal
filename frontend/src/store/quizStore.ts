@@ -11,6 +11,7 @@ interface QuizStore {
   setQuestions: (questions: Question[]) => void
   recordAnswer: (questionId: number, answer: Answer) => void
   advance: () => void
+  goBack: () => void
   reset: () => void
 }
 
@@ -25,5 +26,12 @@ export const useQuizStore = create<QuizStore>((set) => ({
   recordAnswer: (questionId, answer) =>
     set((s) => ({ answers: { ...s.answers, [String(questionId)]: answer } })),
   advance: () => set((s) => ({ currentIndex: s.currentIndex + 1 })),
+  goBack: () => set((s) => {
+    if (s.currentIndex <= 0) return s
+    const prevQuestion = s.questions[s.currentIndex - 1]
+    const newAnswers = { ...s.answers }
+    delete newAnswers[String(prevQuestion.id)]
+    return { currentIndex: s.currentIndex - 1, answers: newAnswers }
+  }),
   reset: () => set({ petType: null, questions: [], answers: {}, currentIndex: 0 }),
 }))
