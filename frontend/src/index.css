@@ -1,6 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Noto+Sans+SC:wght@400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Fredoka+One&family=Noto+Sans+SC:wght@400;600;700;900&display=swap');
 
 :root {
+  /* Font stack */
+  --font-display: 'ZCOOL KuaiLe', 'Fredoka One', cursive;
+  --font-deco:    'Fredoka One', cursive;
+  --font-body:    'Noto Sans SC', 'PingFang SC', system-ui, sans-serif;
+
   /* Cat — soft lavender / purple */
   --cat-primary:    #7c3aed;
   --cat-secondary:  #a78bfa;

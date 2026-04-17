@@ -207,12 +207,13 @@
 .questionBadge {
   display: inline-flex;
   align-items: center;
-  padding: 5px 14px;
+  padding: 5px 16px;
   border-radius: 999px;
-  font-size: 13px;
-  font-weight: 800;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: var(--font-display);
   margin-bottom: 18px;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
 }
 .theme_cat .questionBadge {
   background: var(--cat-light);
@@ -224,7 +225,8 @@
 }
 
 .questionText {
-  font-size: clamp(17px, 3vw, 21px);
+  font-size: clamp(17px, 3vw, 20px);
+  font-family: var(--font-body);
   font-weight: 700;
   line-height: 1.65;
   text-align: center;
@@ -311,11 +313,11 @@
   height: 40px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.22);
-  font-size: 17px;
-  font-weight: 900;
+  font-size: 19px;
+  font-weight: 400;
   flex-shrink: 0;
   color: #fff;
-  font-family: 'Fredoka One', cursive;
+  font-family: var(--font-deco);
   transition: background 0.2s;
 }
 .answerBtn.selected .answerLabel { background: rgba(255,255,255,0.35); }
@@ -325,6 +327,7 @@
   color: #fff;
   font-size: 15px;
   font-weight: 600;
+  font-family: var(--font-body);
 }
 
 .checkmark {
