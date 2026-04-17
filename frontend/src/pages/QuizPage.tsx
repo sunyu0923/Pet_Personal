@@ -66,6 +66,7 @@ export default function QuizPage() {
   if (loading) return (
     <div className={styles.center}>
       <div className="spinner" />
+      <p className={styles.loadingText}>加载题目中…</p>
     </div>
   )
 
@@ -78,8 +79,13 @@ export default function QuizPage() {
 
   if (submitting) return (
     <div className={styles.center}>
-      <div className="spinner" />
-      <p style={{ marginTop: 16, color: 'var(--text-muted)' }}>正在分析你的性格类型……</p>
+      <div className={styles.analyzingWrap}>
+        <div className={styles.analyzingDots}>
+          <span /><span /><span />
+        </div>
+        <p className={styles.analyzingText}>正在分析性格类型…</p>
+        <p className={styles.analyzingSubtext}>综合你的所有回答中</p>
+      </div>
     </div>
   )
 
@@ -89,29 +95,32 @@ export default function QuizPage() {
 
   return (
     <div className={`${styles.page} ${styles[`theme_${isPet}`]}`}>
+      {/* background blobs */}
+      <div className={styles.blob1} />
+      <div className={styles.blob2} />
+
       <div className={styles.header}>
-        <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: `${progress}%` }} />
+        <div className={styles.progressWrap}>
+          <div className={styles.progressBar}>
+            <div className={styles.progressFill} style={{ width: `${progress}%` }} />
+          </div>
+          <span className={styles.progressPct}>{progress}%</span>
         </div>
         <div className={styles.meta}>
-          <span className={styles.counter}>{petType === 'dog' ? '狗狗MBTI' : '猫咪性格'}</span>
+          <span className={styles.counter}>{petType === 'dog' ? '🐶 狗狗MBTI' : '🐱 猫咪性格'}</span>
           <span className={styles.counter}>{currentIndex + 1} / {questions.length}</span>
         </div>
       </div>
 
-      {currentIndex > 0 && (
-        <button className={styles.prevBtn} onClick={handleGoBack} disabled={!!selectedAnswer}>
-          ← 上一题
-        </button>
-      )}
-
       <div key={currentIndex} className={`${styles.questionCard} animate-scale-in`}>
+        <div className={styles.questionBadge}>第 {currentIndex + 1} 题</div>
         <p className={styles.questionText}>{question.text}</p>
       </div>
 
       <div className={styles.answers}>
-        {question.options.map((option) => {
+        {question.options.map((option, idx) => {
           const ans = option.key as Answer
+          const label = String.fromCharCode(65 + idx)
           return (
             <button
               key={ans}
@@ -119,11 +128,19 @@ export default function QuizPage() {
               onClick={() => handleAnswer(ans)}
               disabled={!!selectedAnswer}
             >
-              {option.text}
+              <span className={styles.answerLabel}>{label}</span>
+              <span className={styles.answerText}>{option.text}</span>
+              {selectedAnswer === ans && <span className={styles.checkmark}>✓</span>}
             </button>
           )
         })}
       </div>
+
+      {currentIndex > 0 && (
+        <button className={styles.prevBtn} onClick={handleGoBack} disabled={!!selectedAnswer}>
+          ← 上一题
+        </button>
+      )}
     </div>
   )
 }

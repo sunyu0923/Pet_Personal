@@ -1,19 +1,22 @@
+/* ══════════════════════════════
+   Result Page
+   ══════════════════════════════ */
+
 .page {
   max-width: 600px;
   margin: 0 auto;
   width: 100%;
-  padding: 0 0 60px;
+  padding: 0 0 80px;
   display: flex;
   flex-direction: column;
-  gap: 0;
 }
 
 .captureArea {
   display: flex;
   flex-direction: column;
-  gap: 0;
   width: 100%;
   background: var(--bg);
+  padding-bottom: 8px;
 }
 
 .center {
@@ -26,340 +29,444 @@
   padding: 24px;
 }
 
-/* Header card */
-.headerCard {
-  padding: 48px 24px 40px;
+/* ══════════════════════════════
+   DOG hero area
+   ══════════════════════════════ */
+.resultCardWrapper {
+  padding: 36px 20px 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  text-align: center;
-  border-radius: 0 0 24px 24px;
+  gap: 18px;
+  background: linear-gradient(160deg, var(--dog-bg-start), var(--dog-bg-end));
+  position: relative;
+  overflow: hidden;
 }
 
-/* ─── Dog result card (template style) ─── */
-.resultCardWrapper {
-  padding: 28px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  background: linear-gradient(160deg, #e8f5e9, #f1f8e9);
+/* decorative circle behind card */
+.resultCardWrapper::before {
+  content: '';
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: rgba(234, 88, 12, 0.08);
+  top: -60px;
+  right: -60px;
+  pointer-events: none;
 }
 
 .resultCard {
   background: #fff;
-  border-radius: 16px;
-  box-shadow: var(--shadow-lg);
-  padding: 32px 24px 24px;
+  border-radius: 24px;
+  box-shadow: 0 8px 40px rgba(234, 88, 12, 0.18);
+  padding: 36px 28px 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
   width: 100%;
   max-width: 360px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeSlideIn 0.5s ease both;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* top stripe */
+.resultCard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--dog-secondary), var(--dog-primary));
 }
 
 .cardLabel {
-  font-size: 15px;
-  color: #555;
-  font-weight: 500;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin-top: 4px;
 }
 
 .cardTypeName {
-  font-size: 42px;
-  font-weight: 900;
-  color: #222;
+  font-family: 'Fredoka One', cursive;
+  font-size: 44px;
+  font-weight: 400;
+  color: var(--text);
   line-height: 1.1;
+  margin-top: 2px;
 }
 
 .cardTypeCode {
-  font-size: 28px;
-  font-weight: 800;
-  color: #2e7d32;
-  letter-spacing: 3px;
-  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--dog-primary);
+  letter-spacing: 5px;
+  margin-bottom: 12px;
+  padding: 4px 14px;
+  background: var(--dog-light);
+  border-radius: 999px;
 }
 
 .cardImage {
   width: 220px;
   height: 220px;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: 16px;
 }
 
 .cardTagline {
-  font-size: 14px;
-  color: #666;
+  font-size: 13px;
+  color: var(--text-muted);
   text-align: center;
-  max-width: 320px;
-  line-height: 1.6;
+  max-width: 300px;
+  line-height: 1.7;
+  font-style: italic;
 }
 
-/* ─── Info card below the image card ─── */
+/* ─── Dog info card ─── */
 .resultInfoCard {
-  margin: 0 20px;
-  padding: 20px 24px;
+  margin: 0 16px;
+  padding: 18px 22px;
   background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  animation: fadeSlideIn 0.5s 0.1s ease both;
 }
 
 .infoLabel {
-  font-size: 13px;
+  font-size: 11px;
   color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   margin-bottom: 6px;
 }
 
 .infoType {
+  font-family: 'Fredoka One', cursive;
   font-size: 26px;
-  font-weight: 900;
+  font-weight: 400;
   color: var(--text);
   line-height: 1.2;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .infoBreed {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-muted);
+}
+
+/* ══════════════════════════════
+   CAT header card
+   ══════════════════════════════ */
+.headerCard {
+  padding: 56px 28px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  border-radius: 0 0 36px 36px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeSlideIn 0.5s ease both;
 }
 
 .theme_cat.headerCard {
   background: linear-gradient(160deg, var(--cat-bg-start), var(--cat-bg-end));
 }
-
 .theme_dog.headerCard {
   background: linear-gradient(160deg, var(--dog-bg-start), var(--dog-bg-end));
 }
 
-.emoji {
-  font-size: 52px;
-  margin-bottom: 4px;
+/* decorative blob */
+.headerCard::after {
+  content: '';
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  top: -80px;
+  right: -60px;
+  pointer-events: none;
 }
+.theme_cat.headerCard::after { background: rgba(124, 58, 237, 0.07); }
+.theme_dog.headerCard::after { background: rgba(234, 88, 12, 0.07); }
+
+.emoji { font-size: 60px; margin-bottom: 4px; position: relative; z-index: 1; }
 
 .typeCode {
-  font-size: 48px;
-  font-weight: 900;
+  font-family: 'Fredoka One', cursive;
+  font-size: 52px;
+  font-weight: 400;
   letter-spacing: 4px;
   color: var(--text);
+  position: relative;
+  z-index: 1;
 }
 
 .typeName {
   font-size: 22px;
   font-weight: 800;
   color: var(--text);
+  position: relative;
+  z-index: 1;
 }
 
 .tagline {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-muted);
   font-style: italic;
-  max-width: 320px;
-  line-height: 1.5;
+  max-width: 300px;
+  line-height: 1.6;
+  text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
-/* Sections */
+/* ══════════════════════════════
+   Content Sections — card style
+   ══════════════════════════════ */
 .section {
-  padding: 28px 20px;
-  border-bottom: 1px solid var(--border);
+  margin: 16px 16px 0;
+  padding: 24px 22px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  animation: fadeSlideIn 0.45s ease both;
 }
+
+/* stagger each section */
+.section:nth-child(1) { animation-delay: 0.05s; }
+.section:nth-child(2) { animation-delay: 0.12s; }
+.section:nth-child(3) { animation-delay: 0.19s; }
+.section:nth-child(4) { animation-delay: 0.26s; }
 
 .sectionTitle {
-  font-size: 17px;
+  font-size: 11px;
   font-weight: 800;
   margin-bottom: 16px;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sectionTitle::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 13px;
+  border-radius: 999px;
+  background: var(--dog-primary);
+  flex-shrink: 0;
 }
 
 .descPara {
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.85;
   color: var(--text);
   margin-bottom: 12px;
 }
-
 .descPara:last-child { margin-bottom: 0; }
 
-/* Strengths/Weaknesses */
+/* ══════════════════════════════
+   Strengths / Weaknesses
+   ══════════════════════════════ */
 .swGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0;
+  gap: 12px;
+  margin: 16px 16px 0;
+  animation: fadeSlideIn 0.45s 0.15s ease both;
 }
 
 .swCard {
-  padding: 24px 20px;
-  border-bottom: 1px solid var(--border);
+  padding: 22px 18px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
 }
-
-.swCard:first-child {
-  border-right: 1px solid var(--border);
-}
+.swCard:first-child  { background: #f0fdf4; border: 1px solid #bbf7d0; }
+.swCard:last-child   { background: #fef2f2; border: 1px solid #fecaca; }
 
 .swTitle {
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #16a34a;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
-
+.swTitle::before { content: '✦'; font-size: 10px; }
 .weakTitle { color: #dc2626; }
+.weakTitle::before { content: '◆'; }
 
 .swList {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 9px;
 }
 
 .swList li {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text);
-  line-height: 1.4;
+  line-height: 1.5;
   padding-left: 16px;
   position: relative;
 }
-
 .swList li::before {
-  content: '•';
+  content: '·';
   position: absolute;
-  left: 0;
+  left: 2px;
   color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.2;
 }
 
-/* Dimension bars */
+/* ══════════════════════════════
+   Dimension bars
+   ══════════════════════════════ */
 .dimensionBars {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .dimRow {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .dimLabel {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--text-muted);
-  width: 52px;
+  width: 54px;
   flex-shrink: 0;
+  line-height: 1.35;
 }
 
 .dimBarTrack {
   flex: 1;
-  height: 8px;
+  height: 9px;
   background: var(--border);
-  border-radius: 4px;
+  border-radius: 999px;
   overflow: hidden;
   position: relative;
 }
 
 .dimBar {
   height: 100%;
-  border-radius: 4px;
-  transition: width 0.8s ease;
+  border-radius: 999px;
+  transition: width 1s cubic-bezier(0.34, 1.4, 0.64, 1);
 }
-
-.dimBar_cat { background: linear-gradient(90deg, var(--cat-secondary), var(--cat-accent)); }
-.dimBar_dog { background: linear-gradient(90deg, var(--dog-secondary), var(--dog-accent)); }
+.dimBar_cat { background: linear-gradient(90deg, var(--cat-secondary), var(--cat-primary)); }
+.dimBar_dog { background: linear-gradient(90deg, var(--dog-secondary), var(--dog-primary)); }
 
 .midLine {
   position: absolute;
   left: 50%;
   top: 0;
-  width: 2px;
+  width: 1.5px;
   height: 100%;
   background: rgba(0,0,0,0.15);
 }
 
 .dimDominant {
-  font-size: 13px;
-  font-weight: 800;
+  font-size: 12px;
+  font-weight: 900;
   width: 20px;
   flex-shrink: 0;
   text-align: right;
   color: var(--text);
 }
 
-/* Actions */
+/* ══════════════════════════════
+   Actions
+   ══════════════════════════════ */
 .actions {
-  padding: 32px 20px 0;
+  padding: 28px 20px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .retakeBtn {
   background: none;
   color: var(--text-muted);
   font-size: 14px;
-  padding: 8px;
-  transition: color 0.2s;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 999px;
+  transition: color 0.2s, background 0.2s;
+  border: 1.5px solid transparent;
 }
-
-.retakeBtn:hover { color: var(--text); }
+.retakeBtn:hover {
+  color: var(--text);
+  background: var(--surface);
+  border-color: var(--border);
+}
 
 .errorText { color: #dc2626; font-size: 16px; }
 
 .backBtn {
   background: var(--surface);
   color: var(--text);
-  padding: 12px 20px;
+  padding: 12px 22px;
   border-radius: var(--radius-sm);
   font-size: 15px;
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border);
+  transition: box-shadow 0.2s;
 }
+.backBtn:hover { box-shadow: var(--shadow-sm); }
 
-/* ─── Responsive ─── */
+/* ══════════════════════════════
+   Responsive
+   ══════════════════════════════ */
 @media (max-width: 480px) {
-  .resultCard {
-    padding: 24px 16px 20px;
-  }
-  .cardTypeName { font-size: 32px; }
-  .cardTypeCode { font-size: 22px; }
-  .cardImage { width: 180px; height: 180px; }
-  .section { padding: 20px 16px; }
-  .swCard { padding: 20px 16px; }
-  .infoType { font-size: 22px; }
-  .typeCode { font-size: 36px; }
+  .resultCard     { padding: 28px 18px 22px; }
+  .cardTypeName   { font-size: 34px; }
+  .cardTypeCode   { font-size: 16px; }
+  .cardImage      { width: 180px; height: 180px; }
+  .typeCode       { font-size: 40px; }
+  .section        { margin: 12px 12px 0; padding: 20px 16px; }
+  .swGrid         { margin: 12px 12px 0; gap: 10px; }
+  .swCard         { padding: 18px 14px; }
+  .infoType       { font-size: 22px; }
+  .resultInfoCard { margin: 0 12px; }
 }
 
 @media (max-width: 420px) {
-  .swGrid {
-    grid-template-columns: 1fr;
-  }
-  .swCard:first-child {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
+  .swGrid { grid-template-columns: 1fr; }
 }
 
 @media (min-width: 768px) {
-  .page {
-    padding: 20px 0 80px;
-  }
-  .resultCardWrapper {
-    padding: 40px 24px;
-    border-radius: 0 0 24px 24px;
-  }
-  .resultCard {
-    max-width: 400px;
-    padding: 40px 32px 32px;
-  }
-  .cardImage { width: 260px; height: 260px; }
-  .section { padding: 32px 28px; }
+  .page               { padding: 24px 0 96px; }
+  .resultCardWrapper  { padding: 48px 28px 32px; border-radius: 0 0 28px 28px; }
+  .resultCard         { max-width: 400px; padding: 44px 36px 36px; }
+  .cardImage          { width: 260px; height: 260px; }
+  .section            { margin: 16px 20px 0; padding: 28px 26px; }
+  .swGrid             { margin: 16px 20px 0; }
+  .resultInfoCard     { margin: 0 20px; }
 }
 
 @media (min-width: 1024px) {
-  .page {
-    max-width: 680px;
-  }
+  .page { max-width: 680px; }
 }

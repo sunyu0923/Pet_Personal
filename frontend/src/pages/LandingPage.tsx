@@ -21,6 +21,7 @@ export default function LandingPage() {
   return (
     <div className={styles.page}>
       <div className={styles.hero}>
+        <div className={styles.badge}>🐾 宠物性格测试</div>
         <h1 className={styles.title}>PETI</h1>
         <p className={styles.subtitle}>探索你的猫咪或狗狗属于哪种性格类型——也许那其实是你自己。</p>
       </div>
@@ -32,7 +33,9 @@ export default function LandingPage() {
             className={`${styles.card} ${styles[`card_${pet.theme}`]}`}
             onClick={() => handleSelect(pet.type)}
           >
-            <span className={styles.petEmoji}>{pet.emoji}</span>
+            <div className={styles.emojiWrap}>
+              <span className={styles.petEmoji}>{pet.emoji}</span>
+            </div>
             <span className={styles.petLabel}>{pet.label}</span>
             <span className={styles.petTagline}>{pet.tagline}</span>
             <span className={styles.startBtn}>开始测试 →</span>
