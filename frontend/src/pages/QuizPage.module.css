@@ -26,7 +26,7 @@
 .progressBar {
   width: 100%;
   height: 6px;
-  background: rgba(255,255,255,0.1);
+  background: var(--border);
   border-radius: 3px;
   overflow: hidden;
   margin-bottom: 12px;
@@ -39,11 +39,11 @@
 }
 
 .theme_cat .progressFill {
-  background: linear-gradient(90deg, var(--cat-bg-start), var(--cat-accent));
+  background: linear-gradient(90deg, var(--cat-secondary), var(--cat-accent));
 }
 
 .theme_dog .progressFill {
-  background: linear-gradient(90deg, var(--dog-bg-start), var(--dog-accent));
+  background: linear-gradient(90deg, var(--dog-secondary), var(--dog-accent));
 }
 
 .meta {
@@ -51,20 +51,6 @@
   justify-content: space-between;
   align-items: center;
 }
-
-.dimensionPill {
-  font-size: 12px;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 100px;
-  background: rgba(255,255,255,0.1);
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.theme_cat .dimensionPill { color: var(--cat-accent); }
-.theme_dog .dimensionPill { color: var(--dog-accent); }
 
 .counter {
   font-size: 13px;
@@ -74,10 +60,12 @@
 
 .questionCard {
   background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 20px;
   padding: 36px 28px;
   width: 100%;
   margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
 }
 
 .questionText {
@@ -85,6 +73,7 @@
   font-weight: 700;
   line-height: 1.5;
   text-align: center;
+  color: var(--text);
 }
 
 .answers {
@@ -103,22 +92,29 @@
   font-weight: 600;
   text-align: left;
   line-height: 1.4;
-  transition: background 0.15s, transform 0.15s;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: background 0.15s, transform 0.15s, border-color 0.15s;
   min-height: 60px;
 }
 
 .answerBtn:hover:not(:disabled) {
   background: var(--surface-2);
   transform: scale(1.01);
+  border-color: transparent;
 }
 
 .theme_cat .answerBtn.selected {
-  background: linear-gradient(135deg, var(--cat-bg-start), var(--cat-bg-end));
+  background: var(--cat-bg-start);
+  border-color: var(--cat-accent);
+  color: var(--cat-primary);
   transform: scale(1.01);
 }
 
 .theme_dog .answerBtn.selected {
-  background: linear-gradient(135deg, var(--dog-bg-start), var(--dog-bg-end));
+  background: var(--dog-bg-start);
+  border-color: var(--dog-accent);
+  color: var(--dog-primary);
   transform: scale(1.01);
 }
 
@@ -132,7 +128,7 @@
 }
 
 .errorText {
-  color: #f87171;
+  color: #dc2626;
   font-size: 16px;
 }
 
@@ -142,6 +138,7 @@
   padding: 12px 20px;
   border-radius: var(--radius-sm);
   font-size: 15px;
+  border: 1px solid var(--border);
 }
 
 .prevBtn {
@@ -158,10 +155,33 @@
 
 .prevBtn:hover:not(:disabled) {
   color: var(--text);
-  background: rgba(255,255,255,0.08);
+  background: var(--surface-2);
 }
 
 .prevBtn:disabled {
   opacity: 0.4;
   cursor: default;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 480px) {
+  .page {
+    padding: 16px 12px 32px;
+  }
+  .questionCard {
+    padding: 28px 20px;
+  }
+  .answerBtn {
+    padding: 16px 18px;
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding: 40px 24px 60px;
+  }
+  .questionCard {
+    padding: 48px 36px;
+  }
 }

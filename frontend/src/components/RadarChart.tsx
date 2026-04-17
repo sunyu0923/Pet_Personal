@@ -27,25 +27,26 @@ export default function RadarChart({ scores, petType }: Props) {
   return (
     <ResponsiveContainer width="100%" height={280}>
       <ReRadarChart data={data} margin={{ top: 10, right: 30, bottom: 10, left: 30 }}>
-        <PolarGrid stroke="rgba(255,255,255,0.1)" />
+        <PolarGrid stroke="#e5e7eb" />
         <PolarAngleAxis
           dataKey="axis"
-          tick={{ fill: 'rgba(255,255,255,0.7)', fontSize: 13, fontWeight: 600 }}
+          tick={{ fill: '#6b7280', fontSize: 13, fontWeight: 600 }}
         />
         <Radar
           dataKey="value"
           stroke={strokeColor}
           fill={fillColor}
-          fillOpacity={0.35}
+          fillOpacity={0.25}
           strokeWidth={2}
         />
         <Tooltip
           contentStyle={{
-            background: '#1e1e2e',
-            border: `1px solid ${strokeColor}`,
+            background: '#ffffff',
+            border: `1px solid #e5e7eb`,
             borderRadius: 8,
-            color: 'white',
+            color: '#1a1a2e',
             fontSize: 13,
+            boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
           }}
           formatter={(value) => [`${value}%`, '得分']}
         />

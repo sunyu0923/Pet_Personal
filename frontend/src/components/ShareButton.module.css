@@ -1,15 +1,21 @@
 .btn {
-  background: rgba(255,255,255,0.1);
-  color: var(--text);
+  background: var(--text);
+  color: #fff;
   padding: 14px 28px;
   border-radius: 100px;
   font-size: 15px;
   font-weight: 700;
-  transition: background 0.2s, transform 0.15s;
+  transition: background 0.2s, transform 0.15s, opacity 0.2s;
   min-width: 180px;
+  box-shadow: var(--shadow-md);
 }
 
-.btn:hover {
-  background: rgba(255,255,255,0.18);
+.btn:hover:not(:disabled) {
+  opacity: 0.88;
   transform: scale(1.03);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: default;
 }

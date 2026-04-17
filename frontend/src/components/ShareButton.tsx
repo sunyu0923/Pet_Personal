@@ -16,7 +16,7 @@ export default function ShareButton({ captureRef }: ShareButtonProps) {
       const dataUrl = await toPng(captureRef.current, {
         cacheBust: true,
         pixelRatio: 2,
-        backgroundColor: '#0f0f0f',
+        backgroundColor: '#f8f9fa',
       })
       const link = document.createElement('a')
       link.download = 'PETI-结果.png'
