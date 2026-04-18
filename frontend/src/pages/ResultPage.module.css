@@ -39,7 +39,6 @@
   flex-direction: column;
   align-items: center;
   gap: 18px;
-  background: linear-gradient(160deg, var(--dog-bg-start), var(--dog-bg-end));
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-lg);
@@ -81,14 +80,35 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* top stripe */
-.resultCard::before {
+/* wrapper theme variants */
+.wrapper_dog {
+  background: linear-gradient(160deg, var(--dog-bg-start), var(--dog-bg-end));
+}
+.wrapper_cat {
+  background: linear-gradient(160deg, var(--cat-bg-start), var(--cat-bg-end));
+}
+
+/* card top stripe per pet */
+.card_dog::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 5px;
   background: linear-gradient(90deg, var(--dog-secondary), var(--dog-primary));
 }
+.card_cat::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--cat-secondary), var(--cat-primary));
+}
+
+/* type code pill per pet */
+.typeCode_dog { color: var(--dog-primary); background: var(--dog-light); }
+.typeCode_cat { color: var(--cat-primary); background: var(--cat-light); }
+
+/* section title accent per section (fallback to dog color already set via ::before) */
 
 .cardLabel {
   font-size: 13px;
@@ -171,6 +191,13 @@
   font-size: 13px;
   color: var(--text-muted);
   font-family: var(--font-body);
+}
+
+.infoEnglish {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-family: var(--font-deco);
+  font-weight: 400;
 }
 
 /* ══════════════════════════════
